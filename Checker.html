@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Checker Game</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        position: relative;
+
+        border: 5px solid black;
+      }
+      .row {
+        display: flex;
+        justify-content: center;
+      }
+      .cells {
+        width: 75px;
+        height: 75px;
+        border: 1px solid black;
+      }
+      .black {
+        background-color: #242424;
+      }
+      .white {
+        background-color: #fff;
+      }
+      .red-circles,
+      .black-circles {
+        width: 90%;
+        height: 90%;
+        margin: 5px;
+        border-radius: 50%;
+      }
+      .red-circles {
+        background-color: #ae0d0d;
+        box-shadow: 1px 2px 49px -8px rgba(106, 154, 234, 0.5);
+        transition: all 0.5s ease-in-out;
+      }
+
+      .black-circles {
+        background-color: #434242;
+      }
+      .red-circles:hover {
+        background-color: #f82c2c;
+        box-shadow: 1px 2px 49px -8px rgba(106, 154, 234, 0.5);
+      }
+      .black-circles:hover {
+        background-color: #626161;
+        box-shadow: 1px 2px 49px -8px rgba(0, 0, 0, 0.3);
+      }
+      .start-btn,
+      .end-btn {
+        background-color: beige;
+        width: 100px;
+        height: 50px;
+        color: #626161;
+        position: absolute;
+        font-size: 15px;
+      }
+      .start-btn {
+        top: 45%;
+        left: 5%;
+      }
+      .end-btn {
+        top: 45%;
+        left: 15%;
+      }
+      .active {
+        background-color: green;
+      }
+      .crntcirlce {
+        background-color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="row" id="row-1">
+        <div id="row-cell-1" class="cells black">
+          <div id="red-circle-12" class="red-circles"></div>
+        </div>
+        <div id="row-cell-2" class="cells white"></div>
+        <div id="row-cell-3" class="cells black">
+          <div id="red-circle-11" class="red-circles"></div>
+        </div>
+        <div id="row-cell-4" class="cells white"></div>
+        <div id="row-cell-5" class="cells black">
+          <div id="red-circle-10" class="red-circles"></div>
+        </div>
+        <div id="row-cell-6" class="cells white"></div>
+        <div id="row-cell-7" class="cells black">
+          <div id="red-circle-9" class="red-circles"></div>
+        </div>
+        <div id="row-cell-8" class="cells white"></div>
+      </div>
+      <div class="row" id="row-2">
+        <div id="row-cell-9" class="cells white"></div>
+        <div id="row-cell-10" class="cells black">
+          <div id="red-circle-8" class="red-circles"></div>
+        </div>
+        <div id="row-cell-11" class="cells white"></div>
+        <div id="row-cell-12" class="cells black">
+          <div id="red-circle-7" class="red-circles"></div>
+        </div>
+        <div id="row-cell-13" class="cells white"></div>
+        <div id="row-cell-14" class="cells black">
+          <div id="red-circle-6" class="red-circles"></div>
+        </div>
+        <div id="row-cell-15" class="cells white"></div>
+        <div id="row-cell-16" class="cells black">
+          <div id="red-circle-5" class="red-circles"></div>
+        </div>
+      </div>
+      <div class="row" id="row-3">
+        <div id="row-cell-17" class="cells black">
+          <div id="red-circle-4" class="red-circles"></div>
+        </div>
+        <div id="row-cell-18" class="cells white"></div>
+        <div id="row-cell-19" class="cells black">
+          <div id="red-circle-3" class="red-circles"></div>
+        </div>
+        <div id="row-cell-20" class="cells white"></div>
+        <div id="row-cell-21" class="cells black">
+          <div id="red-circle-2" class="red-circles"></div>
+        </div>
+        <div id="row-cell-22" class="cells white"></div>
+        <div id="row-cell-23" class="cells black">
+          <div id="red-circle-1" class="red-circles"></div>
+        </div>
+        <div id="row-cell-24" class="cells white"></div>
+      </div>
+      <div class="row" id="row-4">
+        <div id="row-cell-25" class="cells white"></div>
+        <div id="row-cell-26" class="cells black"></div>
+        <div id="row-cell-27" class="cells white"></div>
+        <div id="row-cell-28" class="cells black"></div>
+        <div id="row-cell-29" class="cells white"></div>
+        <div id="row-cell-30" class="cells black"></div>
+        <div id="row-cell-31" class="cells white"></div>
+        <div id="row-cell-32" class="cells black"></div>
+      </div>
+      <div class="row" id="row-5">
+        <div id="row-cell-33" class="cells black"></div>
+        <div id="row-cell-34" class="cells white"></div>
+        <div id="row-cell-35" class="cells black"></div>
+        <div id="row-cell-36" class="cells white"></div>
+        <div id="row-cell-37" class="cells black"></div>
+        <div id="row-cell-38" class="cells white"></div>
+        <div id="row-cell-39" class="cells black"></div>
+        <div id="row-cell-40" class="cells white"></div>
+      </div>
+      <div class="row" id="row-6">
+        <div id="row-cell-41" class="cells white"></div>
+        <div id="row-cell-42" class="cells black">
+          <div id="black-circle-1 " class="black-circles"></div>
+        </div>
+        <div id="row-cell-43" class="cells white"></div>
+        <div id="row-cell-44" class="cells black">
+          <div id="black-circle-2 " class="black-circles"></div>
+        </div>
+        <div id="row-cell-45" class="cells white"></div>
+        <div id="row-cell-46" class="cells black">
+          <div id="black-circle-3 " class="black-circles"></div>
+        </div>
+        <div id="row-cell-47" class="cells white"></div>
+        <div id="row-cell-48" class="cells black">
+          <div id="black-circle-4 " class="black-circles"></div>
+        </div>
+      </div>
+      <div class="row" id="row-7">
+        <div id="row-cell-49" class="cells black">
+          <div id="black-circle-5" class="black-circles"></div>
+        </div>
+        <div id="row-cell-50" class="cells white"></div>
+        <div id="row-cell-51" class="cells black">
+          <div id="black-circle-6" class="black-circles"></div>
+        </div>
+        <div id="row-cell-52" class="cells white"></div>
+        <div id="row-cell-53" class="cells black">
+          <div id="black-circle-7" class="black-circles"></div>
+        </div>
+        <div id="row-cell-54" class="cells white"></div>
+        <div id="row-cell-55" class="cells black">
+          <div id="black-circle-8" class="black-circles"></div>
+        </div>
+        <div id="row-cell-56" class="cells white"></div>
+      </div>
+
+      <div class="row" id="row-8">
+        <div id="row-cell-57" class="cells white"></div>
+        <div id="row-cell-58" class="cells black">
+          <div id="black-circle-9" class="black-circles"></div>
+        </div>
+        <div id="row-cell-59" class="cells white"></div>
+        <div id="row-cell-60" class="cells black">
+          <div id="black-circle-10" class="black-circles"></div>
+        </div>
+        <div id="row-cell-61" class="cells white"></div>
+        <div id="row-cell-62" class="cells black">
+          <div id="black-circle-11" class="black-circles"></div>
+        </div>
+        <div id="row-cell-63" class="cells white"></div>
+        <div id="row-cell-64" class="cells black">
+          <div id="black-circle-12" class="black-circles"></div>
+        </div>
+      </div>
+
+      <button id="start-btn" class="start-btn">Start Game</button>
+      <button id="end-btn" class="end-btn">End Game</button>
+    </div>
+
+    <script>
+      // (function(){
+      //    let    currentCirlceid = document.querySelectorAll('.black-circles');
+      let currentItem,
+        currentItemClass,
+        currentParent,
+        currentActiveBlock,
+        activeIndexBlock;
+      let newBlockId;
+      let newBlock;
+      let position;
+
+      //converting them from nodelist to an array
+      let listOfRows = Array.from(document.getElementById("container"));
+      // console.log(
+      //   listOfRows.children[0].IndexOf(document.getElementById("row-cell-3"))
+      // );
+
+      //let blackBlocks = Array.from(document.querySelectorAll(".black"));
+      // console.log(Array.isArray(blackBlocks));
+      // for (let i = 0; i < listOfRows.length; i++) {
+      //   console.log(listOfRows[i]);
+      //   for (let j = 0; j < listOfRows[i].length; j++) {
+      //     console.log(listOfRows[i]);
+      //   }
+      // }
+      //console.log(blackBlocks);
+      let blackCircle = document.querySelector("#container");
+      // Array.from(blackCircle.children).forEach(function (cell, index) {
+      //   //console.log(cell, index);
+      //   Array.from(cell.children).forEach(function (cell, index) {
+      //     console.log(cell, index);
+      //   });
+      // });
+      blackCircle.addEventListener(
+        "click",
+        function (e) {
+          currentItem = e.target;
+
+          currentItemID = parseInt(currentItem.id.substring(9, 11));
+          // activeIndexBlock = blackBlocks.indexOf(currentItem);
+          console.log(currentItemID);
+
+          //  console.log(activeIndexBlock);
+          if (
+            currentItem.classList[1] === "black" &&
+            currentItem.hasChildNodes()
+          ) {
+            currentItem.classList.add("active");
+            currentItem.children[0].classList.add("crntcirlce");
+          }
+
+          if (
+            currentItem.classList[1] === "black" &&
+            currentItem.hasChildNodes() === false
+          ) {
+            currentActiveBlock = document.querySelector(".active");
+            let childblock = currentActiveBlock.innerHTML;
+            currentActiveBlock.innerHTML = " ";
+
+            //  let currentCirlce = document.querySelector("crntcirlce").remove();
+            // let removecircle = currentActiveBlock.removeChild(
+            //   currentActiveBlock.children[0]
+            // );
+            newBlock = e.target;
+            newBlockId = parseInt(newBlock.id.substring(9, 11));
+            currentActiveBlock.classList.remove("active");
+
+            newBlock.innerHTML = childblock;
+
+            newBlock.classList.add("active");
+            console.log(newBlockId);
+          }
+
+          // newBlock.children[0].classList.remove("crntcirlce");
+          // newBlock.classList.remove("active");
+          //currentItem.children[0].classList.add("crntcirlce");
+        },
+        false
+      );
+
+      //   })();
+
+      // container.addEventListener('click', event =>{
+      //     if(event.target.classList.contains(()))
+      // })
+      // let cells = document.querySelectorAll('.row');
+      // console.log(cells);
+      //let activeCircle = document.querySelector('.active');
+      // let blackSquares = document.querySelectorAll('.black');
+      // let blackCircles = document.querySelectorAll('.black-circles');
+      // let redCircles = document.querySelectorAll('.red-circles');
+      //
+
+      // // let clickedElement = cells.onclick = e =>{
+      // //     cells.target.childNodes[0].id;
+      // // }
+
+      // var returnedId = this.id;
+      // var res = returnedId.substr(9, 10);
+      // console.log(res);
+      // var elementClicked = document.getElementById(this.id);
+      // elementClicked.onclick = dostuff;
+      // function dostuff(){
+      //     alert (this.id);
+      // }
+
+      // let blackCells=document.getElementsByClassName('black');
+      // console.log(blackCells);
+      //
+      // for(var i=0; i < blackCells.length; i++)
+      // {
+      //     if(blackCells[i].children[0]!= 'undefined' && blackCells[i].children[0]!= null ){
+      //         console.log(blackCells[i].children[0]);
+      //     }
+      //
+      //
+      //
+      // }
+    </script>
+  </body>
+</html>
