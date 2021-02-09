@@ -222,8 +222,7 @@
     </div>
 
     <script>
-      // (function(){
-      //    let    currentCirlceid = document.querySelectorAll('.black-circles');
+
       let currentItem,
         currentItemClass,
         currentParent,
@@ -233,28 +232,11 @@
       let newBlock;
       let position;
 
-      //converting them from nodelist to an array
+      
       let listOfRows = Array.from(document.getElementById("container"));
-      // console.log(
-      //   listOfRows.children[0].IndexOf(document.getElementById("row-cell-3"))
-      // );
-
-      //let blackBlocks = Array.from(document.querySelectorAll(".black"));
-      // console.log(Array.isArray(blackBlocks));
-      // for (let i = 0; i < listOfRows.length; i++) {
-      //   console.log(listOfRows[i]);
-      //   for (let j = 0; j < listOfRows[i].length; j++) {
-      //     console.log(listOfRows[i]);
-      //   }
-      // }
-      //console.log(blackBlocks);
+     
       let blackCircle = document.querySelector("#container");
-      // Array.from(blackCircle.children).forEach(function (cell, index) {
-      //   //console.log(cell, index);
-      //   Array.from(cell.children).forEach(function (cell, index) {
-      //     console.log(cell, index);
-      //   });
-      // });
+
       blackCircle.addEventListener(
         "click",
         function (e) {
@@ -281,10 +263,7 @@
             let childblock = currentActiveBlock.innerHTML;
             currentActiveBlock.innerHTML = " ";
 
-            //  let currentCirlce = document.querySelector("crntcirlce").remove();
-            // let removecircle = currentActiveBlock.removeChild(
-            //   currentActiveBlock.children[0]
-            // );
+     
             newBlock = e.target;
             newBlockId = parseInt(newBlock.id.substring(9, 11));
             currentActiveBlock.classList.remove("active");
@@ -295,51 +274,12 @@
             console.log(newBlockId);
           }
 
-          // newBlock.children[0].classList.remove("crntcirlce");
-          // newBlock.classList.remove("active");
-          //currentItem.children[0].classList.add("crntcirlce");
+
         },
         false
       );
 
-      //   })();
 
-      // container.addEventListener('click', event =>{
-      //     if(event.target.classList.contains(()))
-      // })
-      // let cells = document.querySelectorAll('.row');
-      // console.log(cells);
-      //let activeCircle = document.querySelector('.active');
-      // let blackSquares = document.querySelectorAll('.black');
-      // let blackCircles = document.querySelectorAll('.black-circles');
-      // let redCircles = document.querySelectorAll('.red-circles');
-      //
-
-      // // let clickedElement = cells.onclick = e =>{
-      // //     cells.target.childNodes[0].id;
-      // // }
-
-      // var returnedId = this.id;
-      // var res = returnedId.substr(9, 10);
-      // console.log(res);
-      // var elementClicked = document.getElementById(this.id);
-      // elementClicked.onclick = dostuff;
-      // function dostuff(){
-      //     alert (this.id);
-      // }
-
-      // let blackCells=document.getElementsByClassName('black');
-      // console.log(blackCells);
-      //
-      // for(var i=0; i < blackCells.length; i++)
-      // {
-      //     if(blackCells[i].children[0]!= 'undefined' && blackCells[i].children[0]!= null ){
-      //         console.log(blackCells[i].children[0]);
-      //     }
-      //
-      //
-      //
-      // }
     </script>
   </body>
 </html>
